@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; color: #333; }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background: #0066cc;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background-color 0.2s, transform 0.1s;
+    }
+    .btn:hover { background-color: #0052a3; }
+    .btn:active { transform: scale(0.98); }
+    .btn:focus-visible { outline: 3px solid #ffcc00; outline-offset: 3px; }
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); border: 0; }
+    #feedback { margin-top: 20px; font-weight: 500; color: #2e7d32; min-height: 1.5em; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="sr-only">Skip to content</a>
+  <header><h1>🎨 TestRepo</h1></header>
+  <main id="main">
+    <p>Welcome! This project is a foundation for building accessible web applications.</p>
+    <button id="get-started" type="button" class="btn" aria-label="Start exploring TestRepo">Get Started</button>
+    <div id="feedback" aria-live="polite"></div>
+  </main>
+  <script>
+    document.getElementById('get-started').addEventListener('click', () => {
+      const feedback = document.getElementById('feedback');
+      feedback.textContent = '🚀 Exploration started! Welcome aboard.';
+      setTimeout(() => {
+        feedback.textContent = '';
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
