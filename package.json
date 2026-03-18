@@ -1,0 +1,9 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "UX project by Palette",
+  "scripts": {
+    "test": "grep -q 'Skip to main content' index.html && echo 'Skip link found. A11y check passed.' || (echo 'Skip link missing.' && exit 1)"
+  },
+  "packageManager": "pnpm@10.30.3"
+}
