@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestRepo - Accessible Landing Page</title>
+    <style>
+        .skip-link { position: absolute; left: -10000px; top: 0; background: #000; color: #fff; padding: 8px; z-index: 100; text-decoration: none; }
+        .skip-link:focus { left: 0; outline: 3px solid #ffbf00; }
+        body { font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; max-width: 40rem; margin: 4rem auto; padding: 0 1.5rem; color: #333; }
+        h1 { margin-bottom: 0.5rem; }
+        p { color: #666; margin-bottom: 2rem; }
+        button { background: #007bff; color: white; border: none; padding: 0.75rem 1.5rem; border-radius: 4px; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #0056b3; }
+        button:focus-visible { outline: 3px solid #ffbf00; outline-offset: 2px; }
+        #feedback { margin-top: 1.5rem; font-weight: 500; color: #28a745; min-height: 1.5rem; }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    <header><h1>TestRepo</h1></header>
+    <main id="main" tabindex="-1">
+        <p>Your minimalist starting point for excellence. Simple, clean, and accessible.</p>
+        <button aria-label="Get started with TestRepo" onclick="handleStart()">Get Started</button>
+        <div id="feedback" role="status" aria-live="polite"></div>
+    </main>
+    <footer style="margin-top: 4rem; padding-top: 1rem; border-top: 1px solid #eee; color: #888; font-size: 0.875rem;">
+        <p>&copy; 2024 TestRepo</p>
+    </footer>
+    <script>
+        function handleStart() {
+            const feedback = document.getElementById('feedback');
+            feedback.textContent = '🚀 Initializing TestRepo... Welcome!';
+        }
+    </script>
+</body>
+</html>
