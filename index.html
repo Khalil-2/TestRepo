@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TestRepo - Welcome</title>
+    <style>
+        :root {
+            --primary-color: #0066cc;
+            --focus-outline: 3px solid #ffcc00;
+        }
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            line-height: 1.5;
+            margin: 0;
+            padding: 0;
+            color: #333;
+        }
+        .skip-link {
+            position: absolute;
+            left: -10000px;
+            top: auto;
+            width: 1px;
+            height: 1px;
+            overflow: hidden;
+            background: #fff;
+            color: var(--primary-color);
+            padding: 1rem;
+            z-index: 100;
+        }
+        .skip-link:focus {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: auto;
+            height: auto;
+            outline: var(--focus-outline);
+        }
+        header, footer {
+            background: #f4f4f4;
+            padding: 1rem 2rem;
+            border-bottom: 1px solid #ddd;
+        }
+        footer {
+            border-top: 1px solid #ddd;
+            margin-top: 2rem;
+        }
+        main {
+            padding: 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        main:focus {
+            outline: none;
+        }
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #0052a3;
+        }
+        button:focus-visible {
+            outline: var(--focus-outline);
+            outline-offset: 2px;
+        }
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header>
+        <nav aria-label="Main Navigation">
+            <strong>TestRepo</strong>
+        </nav>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+        <h1>Welcome to TestRepo</h1>
+        <p>This is a starting point for your project, designed with accessibility in mind.</p>
+
+        <div style="margin-top: 2rem;">
+            <button id="get-started-btn" aria-label="Get started with TestRepo">
+                Get Started
+            </button>
+            <p id="status-message" aria-live="polite" class="sr-only"></p>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 TestRepo. Built for everyone.</p>
+    </footer>
+
+    <script>
+        const btn = document.getElementById('get-started-btn');
+        const status = document.getElementById('status-message');
+
+        btn.addEventListener('click', () => {
+            btn.disabled = true;
+            btn.textContent = 'Starting...';
+            status.textContent = 'Initializing TestRepo experience. Please wait.';
+
+            setTimeout(() => {
+                btn.textContent = 'Started!';
+                status.textContent = 'TestRepo has been successfully started.';
+            }, 2000);
+        });
+    </script>
+</body>
+</html>
