@@ -1,0 +1,16 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>TestRepo</title><style>
+  body{font-family:system-ui,sans-serif;max-width:40rem;margin:4rem auto;padding:0 1rem;background:#f8fafc;color:#1e293b}
+  main{background:#fff;padding:2rem;border-radius:1rem;box-shadow:0 10px 15px -3px #0000001a}
+  button{background:#2563eb;color:#fff;border:none;padding:.75rem 1.5rem;border-radius:.5rem;cursor:pointer;font-weight:600;transition:.2s}
+  button:hover{background:#1d4ed8}
+  button:focus-visible{outline:2px solid #2563eb;outline-offset:4px}
+  #msg{margin-top:1.5rem;padding:1rem;background:#f0fdf4;color:#166534;border-radius:.5rem;border:1px solid #bbf7d0;opacity:0;transition:.3s}
+  #msg:not([hidden]){opacity:1}
+</style></head><body><main>
+  <h1>TestRepo</h1><p>Welcome! Click the button below to perform an action.</p>
+  <button id="btn">Perform Action</button>
+  <div id="msg" role="status" aria-live="polite" hidden>Action successful!</div>
+</main><script>
+  const b=document.getElementById('btn'),m=document.getElementById('msg');
+  b.onclick=()=>{m.hidden=0;setTimeout(()=>m.hidden=1,3000)};
+</script></body></html>
