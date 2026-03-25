@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to TestRepo</title>
+    <style>
+        :root { --p: #2563eb; --f: #1f2937; }
+        body { font-family: system-ui, sans-serif; line-height: 1.5; color: var(--f); display: grid; place-items: center; min-height: 100vh; margin: 0; text-align: center; }
+        .skip { position: absolute; left: -9999px; }
+        .skip:focus { position: static; padding: 1rem; border: 2px solid var(--p); }
+        .btn { display: inline-block; padding: 0.75rem 1.5rem; background: var(--p); color: #fff; text-decoration: none; border-radius: 0.5rem; font-weight: 600; }
+        .btn:hover { background: #1d4ed8; }
+        .btn:focus-visible { outline: 3px solid #93c5fd; outline-offset: 2px; }
+    </style>
+</head>
+<body>
+    <a href="#main" class="skip">Skip to main content</a>
+    <main id="main" tabindex="-1">
+        <h1>Welcome to TestRepo</h1>
+        <p>A clean slate for your next big idea. Start building today.</p>
+        <a href="https://github.com" class="btn" aria-label="Get Started: Explore the repository on GitHub">Get Started</a>
+    </main>
+</body>
+</html>
