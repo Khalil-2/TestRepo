@@ -1,0 +1,9 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo 'No tests configured, skipping...'",
+    "lint": "echo 'No linting tool configured, skipping...'"
+  },
+  "packageManager": "pnpm@10.30.3"
+}

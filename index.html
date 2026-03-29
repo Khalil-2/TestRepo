@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to TestRepo</title>
+    <style>
+        body { font-family: system-ui, sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background-color: #f4f4f9; }
+        .skip-link { position: absolute; top: -40px; background: #000; color: #fff; padding: 8px; transition: top 0.2s; }
+        .skip-link:focus { top: 0; }
+        main { text-align: center; padding: 2rem; background: #fff; border-radius: 8px; box-shadow: 0 4px 6px #0002; }
+        button { padding: 0.5rem 1rem; cursor: pointer; border: 1px solid #ccc; border-radius: 4px; background: #eee; transition: background 0.2s, transform 0.1s; }
+        button:hover { background: #ddd; }
+        button:active { transform: translateY(2px); }
+        #feedback { margin-top: 1rem; min-height: 1.5rem; color: #2e7d32; opacity: 0; transition: opacity 0.3s; }
+        #feedback.visible { opacity: 1; }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    <main id="main-content" tabindex="-1">
+        <h1>Welcome to TestRepo</h1>
+        <p>This is a starting point for the project.</p>
+        <button id="action-btn" aria-label="Start processing">Click me!</button>
+        <div id="feedback" aria-live="polite"></div>
+    </main>
+    <script>
+        const btn = document.getElementById('action-btn');
+        const feedback = document.getElementById('feedback');
+        btn.onclick = () => {
+            btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Processing...';
+            btn.setAttribute('aria-label', 'Processing action, please wait');
+            setTimeout(() => {
+                btn.disabled = false; btn.setAttribute('aria-busy', 'false'); btn.textContent = 'Click me!';
+                btn.setAttribute('aria-label', 'Start processing');
+                feedback.textContent = 'Action completed successfully!';
+                feedback.classList.add('visible');
+                setTimeout(() => { feedback.classList.remove('visible'); }, 3000);
+            }, 1000);
+        };
+    </script>
+</body>
+</html>
