@@ -1,0 +1,10 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "echo \"No tests defined.\"",
+    "lint": "echo \"No linting defined.\""
+  },
+  "author": "Palette",
+  "license": "MIT"
+}
