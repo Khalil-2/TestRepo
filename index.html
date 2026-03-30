@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>TestRepo - Accessible Landing Page</title>
+  <style>
+    :root { font-family: system-ui; line-height: 1.5; color-scheme: light dark; }
+    body { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+    .skip-link { position: absolute; left: -9999px; }
+    .skip-link:focus { position: static; background: #3490dc; color: #fff; padding: 0.5rem; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <p>A minimal landing page focused on accessibility.</p>
+    <button id="msg-btn" onclick="document.getElementById('live').innerText='Button clicked! 🎨'">
+      Click for a message
+    </button>
+    <div id="live" aria-live="polite" style="margin-top: 1rem; font-weight: bold;"></div>
+  </main>
+</body>
+</html>
