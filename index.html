@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo - Accessible Landing Page</title>
+</head>
+<body>
+  <a href="#main">Skip to content</a>
+  <header><h1>TestRepo 🧪</h1></header>
+  <main id="main" tabindex="-1">
+    <h2>Accessible Baseline ✨</h2>
+    <p>This project uses semantic HTML and interactive feedback.</p>
+    <div role="group" aria-label="Greeting controls">
+      <button id="btn" aria-describedby="hint">Greet</button>
+      <button id="clear-btn" aria-label="Clear status message" disabled>Clear</button>
+    </div>
+    <p id="hint">Announces a status update.</p>
+    <div id="status" aria-live="polite" role="status"></div>
+  </main>
+  <footer><hr><p>&copy; 2025 TestRepo</p></footer>
+  <script>
+    const btn = document.getElementById('btn');
+    const clearBtn = document.getElementById('clear-btn');
+    const status = document.getElementById('status');
+
+    btn.addEventListener('click', () => {
+      const originalText = btn.textContent;
+      btn.textContent = 'Greeting...';
+      btn.disabled = true;
+
+      setTimeout(() => {
+        status.textContent = 'Welcome! Interactive feedback active.';
+        btn.textContent = originalText;
+        btn.disabled = false;
+        clearBtn.disabled = false;
+      }, 500);
+    });
+
+    clearBtn.addEventListener('click', () => {
+      status.textContent = '';
+      clearBtn.disabled = true;
+    });
+  </script>
+</body>
+</html>
