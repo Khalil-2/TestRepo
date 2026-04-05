@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo - Accessible Landing Page</title>
+</head>
+<body>
+  <a href="#main">Skip to content</a>
+  <header><h1>TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <h2>Accessible Baseline</h2>
+    <p>This project uses semantic HTML and interactive feedback.</p>
+    <button id="btn" aria-describedby="hint">Greet</button>
+    <p id="hint">Announces a status update.</p>
+    <div style="display: flex; align-items: center; gap: 8px;">
+      <div id="status" aria-live="polite"></div>
+      <button id="copy-btn" style="display: none;" aria-label="Copy status message to clipboard">Copy</button>
+    </div>
+  </main>
+  <footer><hr><p>&copy; 2025 TestRepo</p></footer>
+  <script>
+    const btn = document.getElementById('btn');
+    const status = document.getElementById('status');
+    const copyBtn = document.getElementById('copy-btn');
+
+    btn.addEventListener('click', () => {
+      btn.disabled = true;
+      const originalText = btn.textContent;
+      btn.textContent = 'Sending...';
+
+      status.textContent = 'Welcome! Interactive feedback active 👋';
+      copyBtn.style.display = 'inline-block';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }, 800);
+    });
+
+    copyBtn.addEventListener('click', async () => {
+      try {
+        await navigator.clipboard.writeText(status.textContent);
+        const originalCopyText = copyBtn.textContent;
+        copyBtn.textContent = 'Copied! ✅';
+        copyBtn.setAttribute('aria-label', 'Status message copied to clipboard');
+
+        setTimeout(() => {
+          copyBtn.textContent = originalCopyText;
+          copyBtn.setAttribute('aria-label', 'Copy status message to clipboard');
+        }, 2000);
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+      }
+    });
+  </script>
+</body>
+</html>
