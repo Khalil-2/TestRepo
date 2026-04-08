@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo - Accessible Landing Page</title>
+</head>
+<body>
+  <a href="#main">Skip to content</a>
+  <header><h1>TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <h2>Accessible Baseline</h2>
+    <p>This project uses semantic HTML and interactive feedback.</p>
+    <p>
+      <label for="name">Your Name:</label>
+      <input id="name" type="text" maxlength="20" aria-describedby="char-count" placeholder="Alex">
+      <small id="char-count" aria-live="polite">0/20</small>
+    </p>
+    <button id="btn" aria-describedby="hint" aria-busy="false">Greet</button>
+    <p id="hint">Triggers a personalized welcome message.</p>
+    <div id="status" aria-live="polite"></div>
+  </main>
+  <footer><hr><p>&copy; 2025 TestRepo</p></footer>
+  <script>
+    const btn = document.getElementById('btn'), status = document.getElementById('status'), nameIn = document.getElementById('name'), count = document.getElementById('char-count');
+    nameIn.oninput = () => {
+      count.textContent = `${nameIn.value.length}/20`;
+      btn.textContent = nameIn.value.trim() ? `Greet ${nameIn.value.trim()}` : 'Greet';
+    };
+    btn.onclick = () => {
+      btn.disabled = true; btn.setAttribute('aria-busy', 'true');
+      const old = btn.textContent; btn.textContent = 'Greeting...';
+      setTimeout(() => {
+        status.textContent = `Welcome, ${nameIn.value.trim() || 'friend'}! Interaction active 👋`;
+        btn.disabled = false; btn.setAttribute('aria-busy', 'false');
+        btn.textContent = old; btn.focus();
+      }, 800);
+    };
+  </script>
+</body>
+</html>
