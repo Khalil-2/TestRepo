@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <a href="#main">Skip to content</a>
+  <header><h1>TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <h2>Accessible Baseline</h2>
+    <p>This project uses semantic HTML and interactive feedback.</p>
+    <p>
+      <label for="name">Your Name:</label>
+      <input id="name" type="text" placeholder="Alex" aria-describedby="hint">
+    </p>
+    <button id="btn" aria-describedby="hint">Greet</button>
+    <p id="hint">Enter your name and press Greet or Enter to see a message.</p>
+    <div id="status" aria-live="polite" style="margin-top: 1em; font-weight: bold;"></div>
+  </main>
+  <footer><hr><p>&copy; 2025 TestRepo</p></footer>
+  <script>
+    const btn = document.getElementById('btn');
+    const nameIn = document.getElementById('name');
+    const status = document.getElementById('status');
+
+    const handleGreet = () => {
+      const name = nameIn.value.trim() || 'friend';
+      status.textContent = `Welcome, ${name}! Interaction active 👋`;
+    };
+
+    btn.addEventListener('click', handleGreet);
+    nameIn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        handleGreet();
+      }
+    });
+  </script>
+</body>
+</html>
