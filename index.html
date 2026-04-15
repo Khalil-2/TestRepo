@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo | Accessible Landing Page</title>
+</head>
+<body>
+  <a href="#main">Skip to content</a>
+  <header><h1>TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <h2>Accessible Baseline</h2>
+    <p>This project uses semantic HTML and interactive feedback.</p>
+    <button id="btn" aria-describedby="hint">Greet</button>
+    <p id="hint">Announces a status update.</p>
+    <div id="status" aria-live="polite"></div>
+  </main>
+  <footer><hr><p>&copy; 2025 TestRepo</p></footer>
+  <script>
+    const btn = document.getElementById('btn');
+    const status = document.getElementById('status');
+    btn.addEventListener('click', () => {
+      if (btn.disabled) return;
+      btn.disabled = true;
+      btn.setAttribute('aria-busy', 'true');
+      const originalText = btn.textContent;
+      btn.textContent = 'Greeting... ⏳';
+      status.textContent = '';
+      setTimeout(() => {
+        status.textContent = 'Welcome! Interactive feedback active. ✅';
+        btn.disabled = false;
+        btn.removeAttribute('aria-busy');
+        btn.textContent = originalText;
+        btn.focus();
+      }, 800);
+    });
+  </script>
+</body>
+</html>
