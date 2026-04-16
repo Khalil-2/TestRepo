@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo | Accessible Greeting</title>
+</head>
+<body>
+  <a href="#main">Skip to content</a>
+  <header><h1>TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <h2>Accessible Baseline</h2>
+    <p>This project uses semantic HTML and interactive feedback.</p>
+    <button id="btn" aria-describedby="hint">Greet</button>
+    <p id="hint">Announces a status update.</p>
+    <div id="status" aria-live="polite"></div>
+    <button id="copy-btn" hidden aria-label="Copy greeting">Copy</button>
+  </main>
+  <footer><hr><p>&copy; 2025 TestRepo</p></footer>
+  <script>
+    const btn = document.getElementById('btn');
+    const status = document.getElementById('status');
+    const copyBtn = document.getElementById('copy-btn');
+    btn.addEventListener('click', () => {
+      status.textContent = 'Welcome! Interactive feedback active. ✅';
+      copyBtn.hidden = false;
+    });
+    copyBtn.addEventListener('click', async () => {
+      await navigator.clipboard.writeText(status.textContent);
+      copyBtn.textContent = 'Copied! ✨';
+      copyBtn.setAttribute('aria-label', 'Greeting copied');
+      setTimeout(() => {
+        copyBtn.textContent = 'Copy';
+        copyBtn.setAttribute('aria-label', 'Copy greeting');
+      }, 2000);
+    });
+  </script>
+</body>
+</html>
