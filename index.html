@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo | Greeting</title>
+</head>
+<body>
+  <a href="#main">Skip to content</a>
+  <header><h1>TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <form id="greet-form">
+      <p><label for="name">Name:</label>
+        <input id="name" maxlength="20" aria-describedby="char-count">
+        <small id="char-count">0/20</small></p>
+      <button id="btn" aria-busy="false" type="submit">Greet</button>
+    </form>
+    <div id="status" aria-live="polite"></div>
+  </main>
+  <footer><hr><p>&copy; 2025 TestRepo</p></footer>
+  <script>
+    const btn = document.getElementById('btn'), status = document.getElementById('status'), nameInput = document.getElementById('name'), count = document.getElementById('char-count'), form = document.getElementById('greet-form');
+    const update = () => { if (btn.getAttribute('aria-busy') === 'false') btn.textContent = nameInput.value.trim() ? `Greet ${nameInput.value.trim()}` : 'Greet'; };
+    nameInput.addEventListener('input', () => { count.textContent = `${nameInput.value.length}/20`; update(); });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (btn.disabled) return;
+      btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Greeting...';
+      setTimeout(() => {
+        status.textContent = `Welcome, ${nameInput.value.trim() || 'friend'}! 👋`;
+        btn.disabled = false; btn.setAttribute('aria-busy', 'false'); update();
+      }, 800);
+    });
+  </script>
+</body>
+</html>
