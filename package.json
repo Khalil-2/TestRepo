@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "scripts": {
+    "lint": "grep -q 'lang=\"en\"' index.html",
+    "test": "grep -q 'id=\"copy-btn\"' index.html"
+  }
+}
