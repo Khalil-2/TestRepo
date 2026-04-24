@@ -1,0 +1,10 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "grep -q 'aria-describedby=\"char-count\"' index.html && grep -q 'aria-live=\"polite\"' index.html",
+    "lint": "grep -q '<!DOCTYPE html>' index.html && grep -q '<html lang=\"en\">' index.html"
+  },
+  "author": "Palette",
+  "license": "MIT"
+}
