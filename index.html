@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo</title>
+</head>
+<body>
+  <a href="#main">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <p>Minimal accessible landing page with interactive touches.</p>
+    <button id="msg-btn">Click for a message</button>
+    <div id="live" aria-live="polite"></div>
+  </main>
+  <script>
+    const btn = document.getElementById('msg-btn');
+    const live = document.getElementById('live');
+    btn.addEventListener('click', () => {
+      if (btn.disabled) return;
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Loading...';
+      live.textContent = 'Sending request...';
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.textContent = originalText;
+        live.textContent = 'Button clicked! 🎨';
+      }, 800);
+    });
+  </script>
+</body>
+</html>
