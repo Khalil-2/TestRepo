@@ -1,0 +1,9 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "grep -q 'aria-live=\"polite\"' index.html && echo 'Accessibility check passed.'",
+    "lint": "grep -q 'lang=\"en\"' index.html && echo 'Lint check passed.'"
+  },
+  "author": "Palette"
+}
