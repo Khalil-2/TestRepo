@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo</title>
+  <style>
+    :root{font-family:system-ui;line-height:1.5}
+    body{max-width:800px;margin:2rem auto;padding:0 1rem}
+    .skip-link{position:absolute;left:-9999px;top:0;z-index:100}
+    .skip-link:focus{left:0;position:fixed;background:#0056b3;color:#fff;padding:.5rem}
+    #msg{margin-top:1rem;font-weight:700}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <main id="main" tabindex="-1">
+    <form id="f" style="display:grid;gap:.5rem;max-width:300px">
+      <label for="n">Your Name</label>
+      <input type="text" id="n" maxlength="20" required aria-describedby="c">
+      <span id="c" style="font-size:.8rem;color:#666;text-align:right">0/20</span>
+      <button type="submit" style="width:fit-content">Say Hello</button>
+    </form>
+    <div id="msg" aria-live="polite"></div>
+  </main>
+  <script>
+    const i=document.getElementById('n'),c=document.getElementById('c'),m=document.getElementById('msg');
+    i.oninput=()=>c.textContent=`${i.value.length}/20`;
+    document.getElementById('f').onsubmit=(e)=>{e.preventDefault();if(i.value.trim())m.textContent=`Hello, ${i.value.trim()}! 🎨`;};
+  </script>
+</body></html>
