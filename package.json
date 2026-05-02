@@ -1,0 +1,10 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "grep -q 'aria-live=\"polite\"' index.html && grep -q 'class=\"skip-link\"' index.html",
+    "lint": "grep -q 'lang=\"en\"' index.html && grep -q '<meta charset=\"UTF-8\">' index.html"
+  },
+  "author": "Palette",
+  "license": "MIT"
+}
