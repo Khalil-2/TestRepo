@@ -1,0 +1,24 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TestRepo</title><style>
+:root{font-family:system-ui,sans-serif;line-height:1.5}body{max-width:600px;margin:2rem auto;padding:0 1rem}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:100}.skip-link:focus{left:0;position:fixed;background:#0056b3;color:#fff;padding:.5rem}
+.card{border:1px solid #ddd;border-radius:8px;padding:1.5rem;text-align:center;margin-top:1rem}
+.swatch{height:100px;background:#FF5733;border-radius:4px;margin-bottom:1rem}
+button{padding:.5rem 1rem;cursor:pointer;background:#0056b3;color:#fff;border:none;border-radius:4px;font-weight:700}
+#live{margin-top:1rem;min-height:1.5em;color:#155724;font-weight:bold}</style></head>
+<body><a href="#main" class="skip-link">Skip to main content</a>
+<header><h1>Palette's Color Pick</h1></header>
+<main id="main" tabindex="-1"><p>Discover your inspiration.</p>
+<div class="card"><div class="swatch" aria-label="Color: #FF5733"></div>
+<p>Hex: <code>#FF5733</code></p>
+<button id="copy-btn" type="button" aria-label="Copy hex code #FF5733">Copy Hex Code</button>
+<div id="live" aria-live="polite"></div></div></main>
+<script>
+const copyBtn=document.getElementById('copy-btn'),liveRegion=document.getElementById('live'),hexVal='#FF5733';
+copyBtn.addEventListener('click',async()=>{
+  if(copyBtn.disabled)return;
+  try{await navigator.clipboard.writeText(hexVal);const oldText=copyBtn.innerText;
+    copyBtn.disabled=true;copyBtn.innerText='Copied! ✅';copyBtn.setAttribute('aria-label','Hex code copied');liveRegion.innerText='Hex code #FF5733 copied to clipboard!';
+    setTimeout(()=>{copyBtn.innerText=oldText;copyBtn.disabled=false;copyBtn.setAttribute('aria-label',`Copy hex code ${hexVal}`);liveRegion.innerText=''},2000);
+  }catch(e){liveRegion.innerText='Failed to copy.';}
+});
+</script></body></html>
