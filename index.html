@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TestRepo</title><style>
+:root{font-family:system-ui,sans-serif;line-height:1.5}body{max-width:600px;margin:2rem auto;padding:0 1rem}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:100}.skip-link:focus{left:0;position:fixed;background:#0056b3;color:#fff;padding:.5rem}
+form{display:grid;gap:.5rem;margin-top:1.5rem}input{padding:.5rem;font-size:1rem;border:1px solid #ccc;border-radius:4px}
+.counter{font-size:.875rem;color:#666;text-align:right}button{padding:.5rem 1rem;cursor:pointer;background:#0056b3;color:#fff;border:none;border-radius:4px;font-weight:bold}
+#greeting-output{margin-top:1.5rem;font-weight:bold;min-height:1.5em;color:#155724}</style></head>
+<body><a href="#main" class="skip-link">Skip to main content</a><header><h1>Greeting Generator</h1></header>
+<main id="main" tabindex="-1"><p>Enter your name to receive a greeting.</p>
+<form id="greet-form"><label for="name-input">Your Name</label>
+<input id="name-input" type="text" maxlength="20" required aria-describedby="char-count" placeholder="e.g. Palette">
+<div id="char-count" class="counter">0/20</div><button type="submit">Get Greeting</button></form>
+<div id="greeting-output" aria-live="polite"></div></main>
+<script>
+const greetForm=document.getElementById('greet-form'), nameInput=document.getElementById('name-input'), charCounter=document.getElementById('char-count'), greetingOutput=document.getElementById('greeting-output');
+nameInput.addEventListener('input',()=>charCounter.textContent=`${nameInput.value.length}/20`);
+greetForm.addEventListener('submit',(e)=>{e.preventDefault();const n=nameInput.value.trim();if(n){greetingOutput.textContent=`Hello, ${n}! Have a wonderful day! 🎨`;nameInput.value='';charCounter.textContent='0/20';nameInput.focus();}});
+</script></body></html>
