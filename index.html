@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Greeting Generator</title><style>
+:root{font-family:system-ui,sans-serif;line-height:1.5}body{max-width:600px;margin:2rem auto;padding:0 1rem}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:100}.skip-link:focus{left:0;position:fixed;background:#0056b3;color:#fff;padding:.5rem}
+form{display:grid;gap:.5rem;margin-top:1.5rem}input{padding:.5rem;font-size:1rem;border:1px solid #ccc;border-radius:4px}
+.counter{font-size:.875rem;color:#666;text-align:right}button{padding:.5rem 1rem;cursor:pointer;background:#0056b3;color:#fff;border:none;border-radius:4px;font-weight:bold}
+#greeting-output{margin-top:1.5rem;font-weight:bold;min-height:1.5em;color:#155724;display:flex;align-items:center;justify-content:space-between}
+.copy-btn{background:#6c757d;font-size:.75rem;padding:.25rem .5rem;margin-left:1rem}</style></head>
+<body><a href="#main" class="skip-link">Skip to main content</a><header><h1>Greeting Generator</h1></header>
+<main id="main" tabindex="-1"><p>Enter your name to receive a greeting.</p>
+<form id="greet-form"><label for="name-input">Your Name</label>
+<input id="name-input" type="text" maxlength="20" required aria-describedby="char-count" placeholder="e.g. Palette">
+<div id="char-count" class="counter">0/20</div><button type="submit">Get Greeting</button></form>
+<div id="greeting-output" aria-live="polite"></div></main>
+<script>
+const greetForm=document.getElementById('greet-form'), nameInput=document.getElementById('name-input'), charCounter=document.getElementById('char-count'), greetingOutput=document.getElementById('greeting-output');
+nameInput.addEventListener('input',()=>charCounter.textContent=`${nameInput.value.length}/20`);
+greetForm.addEventListener('submit',(e)=>{
+  e.preventDefault(); const n=nameInput.value.trim();
+  if(n){
+    const msg=`Hello, ${n}! Have a wonderful day! 🎨`;
+    greetingOutput.textContent='';
+    const span=document.createElement('span'); span.textContent=msg;
+    const btn=document.createElement('button'); btn.type='button'; btn.className='copy-btn'; btn.textContent='Copy'; btn.setAttribute('aria-label', 'Copy greeting to clipboard');
+    btn.addEventListener('click',()=>{
+      if(!navigator.clipboard) return;
+      navigator.clipboard.writeText(msg).then(()=>{
+        btn.textContent='Copied! ✅'; btn.setAttribute('aria-label', 'Greeting copied to clipboard');
+        setTimeout(()=>{btn.textContent='Copy'; btn.setAttribute('aria-label', 'Copy greeting to clipboard');},2000);
+      });
+    });
+    greetingOutput.append(span,btn);
+    nameInput.value=''; charCounter.textContent='0/20'; nameInput.focus();
+  }
+});
+</script></body></html>
