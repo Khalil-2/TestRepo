@@ -1,0 +1,8 @@
+{
+  "name": "testrepo",
+  "private": true,
+  "scripts": {
+    "test": "pnpm lint",
+    "lint": "ls index.html"
+  }
+}
