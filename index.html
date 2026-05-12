@@ -1,0 +1,19 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Greeting Generator</title><style>
+:root{font-family:system-ui,sans-serif;line-height:1.5}body{max-width:600px;margin:2rem auto;padding:0 1rem}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:100}.skip-link:focus{left:0;position:fixed;background:#0056b3;color:#fff;padding:.5rem}
+form{display:grid;gap:.5rem;margin-top:1.5rem}input{padding:.5rem;font-size:1rem;border:1px solid #767676;border-radius:4px}
+button{padding:.5rem 1rem;cursor:pointer;background:#0056b3;color:#fff;border:none;border-radius:4px;font-weight:bold}
+button:disabled{background:#ccc;cursor:not-allowed}#live{margin-top:1.5rem;font-weight:bold;color:#155724;min-height:1.5em}</style></head>
+<body><a href="#main" class="skip-link">Skip to main content</a><header><h1>Greeting Generator</h1></header>
+<main id="main" tabindex="-1"><p>Enter your name for a personalized greeting.</p>
+<form id="greet-form"><label for="name-input">Your Name</label><input id="name-input" type="text" required placeholder="e.g. Palette"><button type="submit" id="submit-btn">Get Greeting</button></form>
+<div id="live" aria-live="polite"></div></main><script>
+const form=document.getElementById('greet-form'),input=document.getElementById('name-input'),btn=document.getElementById('submit-btn'),live=document.getElementById('live');
+form.addEventListener('submit',(e)=>{
+  e.preventDefault();if(btn.disabled)return;const n=input.value.trim();if(!n)return;
+  btn.disabled=true;btn.textContent='Loading...';live.textContent='';
+  setTimeout(()=>{
+    btn.disabled=false;btn.textContent='Get Greeting';live.textContent=`Hello, ${n}! Have a wonderful day! 🎨`;
+    input.value='';input.focus();
+  },800);});
+</script></body></html>
