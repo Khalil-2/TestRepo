@@ -1,0 +1,3 @@
+## 2026-05-14 - [Accessible Character Counter Pattern]
+**Learning:** For text input fields with a length limit, include a visual character counter (e.g., '0/20') linked via `aria-describedby` to provide context without the accessibility 'noise' of `aria-live` announcements on every keystroke. Crucially, do not apply `aria-hidden="true"` to the counter element if it is referenced by `aria-describedby`, as this can cause assistive technologies to ignore it.
+**Action:** Use `aria-describedby` to link character counters to inputs, and ensure they remain visible to both sighted and screen reader users.

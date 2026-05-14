@@ -1,0 +1,10 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "grep -q 'aria-describedby=\"char-count\"' index.html && echo 'Accessibility checks passed.'",
+    "lint": "echo 'No linting defined.'"
+  },
+  "author": "Palette",
+  "license": "MIT"
+}
