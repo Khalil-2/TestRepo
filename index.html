@@ -1,0 +1,41 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>TestRepo</title>
+<style>
+  :root{font-family:system-ui;line-height:1.5}
+  .skip-link{position:fixed;top:-100px;left:0;background:#0056b3;color:#fff;padding:.5rem;z-index:100}.skip-link:focus{top:0}
+  #live{margin-top:1rem;font-weight:700;color:#155724}
+  .counter{font-size:.875rem;color:#666;margin-left:.5rem}
+</style></head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <form id="greet-form">
+      <label for="name">Your Name:</label>
+      <input type="text" id="name" maxlength="20" aria-describedby="char-count" required>
+      <span id="char-count" class="counter">0/20</span>
+      <button type="submit" id="btn">Generate Greeting</button>
+    </form>
+    <div id="live" aria-live="polite"></div>
+  </main>
+  <script>
+    const input = document.getElementById('name'), count = document.getElementById('char-count');
+    const live = document.getElementById('live'), btn = document.getElementById('btn');
+    input.addEventListener('input', () => count.textContent = `${input.value.length}/20`);
+    document.getElementById('greet-form').onsubmit = (e) => {
+      e.preventDefault();
+      if (btn.disabled) return;
+      btn.disabled = true;
+      const original = btn.textContent;
+      btn.textContent = 'Generating...';
+      setTimeout(() => {
+        live.textContent = `Hello, ${input.value}! 🎨`;
+        btn.disabled = false;
+        btn.textContent = original;
+        input.value = '';
+        count.textContent = '0/20';
+        input.focus();
+      }, 800);
+    };
+  </script>
+</body></html>
