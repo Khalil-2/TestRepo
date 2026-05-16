@@ -1,0 +1,44 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo</title>
+  <style>
+    :root { font-family: system-ui; line-height: 1.5; }
+    .skip-link { position: fixed; top: -100px; left: 0; background: #0056b3; color: #fff; padding: 0.5rem; z-index: 100; }
+    .skip-link:focus { top: 0; }
+    #live { margin-top: 1rem; font-weight: 700; color: #155724; }
+  </style>
+</head>
+<body style="max-width: 800px; margin: 2rem auto; padding: 0 1rem;">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <p>Minimal accessible landing page with interactive delight.</p>
+    <form id="interaction-form">
+      <button type="submit" id="msg-btn">Click for a message</button>
+    </form>
+    <div id="live" aria-live="polite"></div>
+  </main>
+  <footer style="margin-top: 2rem; border-top: 1px solid #ddd; padding-top: 1rem;">
+    <p>&copy; 2026 TestRepo</p>
+  </footer>
+  <script>
+    const form = document.getElementById('interaction-form');
+    const btn = document.getElementById('msg-btn');
+    const live = document.getElementById('live');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (btn.disabled) return;
+      btn.disabled = true;
+      const originalText = btn.textContent;
+      btn.textContent = 'Loading...';
+      setTimeout(() => {
+        live.textContent = '';
+        live.textContent = 'Button clicked! 🎨';
+        btn.disabled = false;
+        btn.textContent = originalText;
+      }, 800);
+    });
+  </script>
+</body></html>

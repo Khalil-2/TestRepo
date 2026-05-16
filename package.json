@@ -1,0 +1,8 @@
+{
+  "name": "test-repo",
+  "private": true,
+  "scripts": {
+    "test": "grep -q 'aria-live=\"polite\"' index.html && grep -q 'class=\"skip-link\"' index.html",
+    "lint": "grep -q 'lang=\"en\"' index.html && grep -q 'viewport' index.html"
+  }
+}
