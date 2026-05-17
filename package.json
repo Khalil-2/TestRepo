@@ -1,0 +1,7 @@
+{
+  "name": "test-repo",
+  "scripts": {
+    "test": "grep -q 'id=\"main\"' index.html",
+    "lint": "grep -q 'lang=\"en\"' index.html"
+  }
+}
