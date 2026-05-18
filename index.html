@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><title>TestRepo</title><style>
+  :root{font-family:system-ui;line-height:1.5}
+  .skip-link{position:absolute;left:-9999px}.skip-link:focus{position:static;background:#0056b3;color:#fff;padding:.5rem}
+  #live{margin-top:1rem;font-weight:700;color:#155724}
+  .field{display:flex;flex-direction:column;gap:.25rem;margin-bottom:1rem}
+  .hint{font-size:.875rem;color:#666}
+</style></head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <form id="greet-form" class="field">
+      <label for="name">Your Name</label>
+      <input id="name" type="text" maxlength="20" required aria-describedby="count">
+      <span id="count" class="hint">0 / 20 characters</span>
+      <button style="width:fit-content;margin-top:.5rem">Get Greeting</button>
+    </form>
+    <div id="live" aria-live="polite"></div>
+  </main>
+  <script>
+    const f=document.getElementById('greet-form'), i=document.getElementById('name'), c=document.getElementById('count'), l=document.getElementById('live');
+    i.oninput=()=>c.textContent=`${i.value.length} / 20 characters`;
+    f.onsubmit=(e)=>{
+      e.preventDefault();
+      l.textContent=`Hello, ${i.value.trim()}! 🎨`;
+      i.value=''; c.textContent='0 / 20 characters'; i.focus();
+    };
+  </script>
+</body></html>
