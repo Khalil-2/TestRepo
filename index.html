@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>TestRepo</title>
+  <style>
+    :root{font-family:system-ui;line-height:1.5}
+    .skip-link{position:absolute;left:-9999px}.skip-link:focus{position:static;background:#0056b3;color:#fff;padding:.5rem}
+    #live{margin-top:1rem;font-weight:700;color:#155724;min-height:1.5em}
+  </style>
+</head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <p>Minimal accessible landing page with interactive delight.</p>
+    <button id="msg-btn" type="button">Click for a message</button>
+    <div id="live" aria-live="polite"></div>
+  </main>
+  <script>
+    const b = document.getElementById('msg-btn'), l = document.getElementById('live');
+    b.addEventListener('click', () => {
+      b.disabled = true;
+      const t = b.textContent;
+      b.textContent = 'Loading...';
+      l.textContent = '';
+      setTimeout(() => {
+        l.textContent = 'Success! Interaction complete. 🎨';
+        b.disabled = false; b.textContent = t;
+      }, 800);
+    });
+  </script>
+</body></html>
