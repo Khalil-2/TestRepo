@@ -1,0 +1,22 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><title>TestRepo</title><style>
+  :root{font-family:system-ui;line-height:1.5}
+  .skip-link{position:absolute;left:-9999px}.skip-link:focus{position:static;background:#0056b3;color:#fff;padding:.5rem}
+  #live{margin-top:1rem;font-weight:700;color:#155724;min-height:1.5em}
+</style></head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <p>Minimal accessible landing page with interactive delight.</p>
+    <button id="msg-btn" type="button">Click for a message</button>
+    <div id="live" aria-live="polite" role="status"></div>
+  </main>
+  <script>
+    const btn=document.getElementById('msg-btn'),live=document.getElementById('live');
+    btn.onclick=()=>{
+      btn.disabled=true;const text=btn.innerText;btn.innerText='Loading...';live.innerText='';
+      setTimeout(()=>{btn.disabled=false;btn.innerText=text;live.innerText='Message received! 🎨'},800);
+    };
+  </script>
+</body></html>
