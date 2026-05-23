@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TestRepo</title><style>
+  :root{font-family:system-ui;line-height:1.5}
+  .skip-link{position:fixed;top:-100%;left:0;z-index:100}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+  #liveRegion{margin-top:1rem;font-weight:700;color:#155724}
+  .field{margin-bottom:1rem}
+</style></head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <p>Minimal accessible landing page with interactive delight.</p>
+    <div class="field">
+      <label for="userName">Your Name:</label><br>
+      <input id="userName" type="text" maxlength="20" aria-describedby="charCount">
+      <span id="charCount">0/20</span>
+    </div>
+    <button id="greetBtn" type="button">Greet Me</button>
+    <div id="liveRegion" aria-live="polite"></div>
+  </main>
+  <script>
+    const input = document.getElementById('userName');
+    const count = document.getElementById('charCount');
+    const live = document.getElementById('liveRegion');
+    const btn = document.getElementById('greetBtn');
+    input.addEventListener('input', () => {
+      count.textContent = `${input.value.length}/20`;
+    });
+    btn.addEventListener('click', () => {
+      live.textContent = '';
+      setTimeout(() => {
+        const name = input.value.trim() || 'friend';
+        live.textContent = `Hello, ${name}! 🎨`;
+        input.focus();
+      }, 100);
+    });
+  </script>
+</body></html>
