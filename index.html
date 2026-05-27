@@ -1,0 +1,25 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Palette</title><style>
+:root{font-family:system-ui;line-height:1.5}
+.skip-link{position:fixed;top:-100%;left:0;z-index:100}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+#count{font-size:.875rem;color:#555}#live{margin-top:1rem;font-weight:700;color:#155724}
+button:disabled{opacity:.7;cursor:not-allowed}
+</style></head>
+<body style="max-width:600px;margin:2rem auto;padding:0 1rem">
+<a href="#main" class="skip-link">Skip to main content</a>
+<header><h1>Greeting Generator</h1></header>
+<main id="main" tabindex="-1">
+<form id="greet-form">
+<label for="name">Your Name:</label>
+<input id="name" type="text" maxlength="20" aria-describedby="count" required>
+<div id="count" aria-live="polite">Characters left: 20</div>
+<button id="btn" type="submit" style="margin-top:1rem">Get Greeting</button>
+</form>
+<div id="live" aria-live="polite"></div>
+</main>
+<script>
+const form=document.getElementById('greet-form'),input=document.getElementById('name'),count=document.getElementById('count'),btn=document.getElementById('btn'),live=document.getElementById('live');
+input.addEventListener('input',()=>{const left=20-input.value.length;count.textContent=`Characters left: ${left}`});
+form.addEventListener('submit',e=>{e.preventDefault();btn.disabled=true;const old=btn.textContent;btn.textContent='Loading...';live.textContent='';
+setTimeout(()=>{live.textContent=`Hello, ${input.value}! 🎨`;btn.disabled=false;btn.textContent=old;input.value='';input.dispatchEvent(new Event('input'));btn.focus()},800)});
+</script></body></html>
