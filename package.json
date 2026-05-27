@@ -1,0 +1,7 @@
+{
+  "name": "palette-greeting",
+  "scripts": {
+    "test": "grep -q 'aria-live=\"polite\"' index.html && grep -q 'aria-describedby=\"count\"' index.html && echo 'Accessibility check passed.'",
+    "lint": "echo 'No linting defined.'"
+  }
+}
