@@ -1,0 +1,8 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "grep -q 'aria-describedby=\"charCount\"' index.html && grep -q 'id=\"charCount\"' index.html",
+    "lint": "grep -q '<label for=\"nameInput\"' index.html"
+  }
+}

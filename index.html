@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TestRepo</title><style>
+  :root{font-family:system-ui;line-height:1.5}
+  .skip-link{position:fixed;top:-100%;left:0;z-index:100}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+  #live{margin-top:1rem;font-weight:700;color:#155724}
+  .counter{font-size:.875rem;color:#666;margin-top:.25rem}
+</style></head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <p>Minimal accessible landing page with interactive delight.</p>
+    <div style="margin-bottom:1rem">
+      <label for="nameInput" style="display:block;font-weight:500">Enter your name:</label>
+      <input id="nameInput" type="text" maxlength="20" aria-describedby="charCount" style="padding:.5rem;border:1px solid #767676;border-radius:4px;width:100%;max-width:300px">
+      <div id="charCount" class="counter" aria-live="polite">0 / 20 characters</div>
+    </div>
+    <button id="msg-btn">Greet me! 🎨</button>
+    <div id="live" aria-live="polite"></div>
+  </main>
+  <script>
+    const i=document.getElementById('nameInput'),c=document.getElementById('charCount'),b=document.getElementById('msg-btn'),l=document.getElementById('live');
+    i.oninput=()=>c.textContent=`${i.value.length} / 20 characters`;
+    b.onclick=()=>{l.textContent='';setTimeout(()=>l.textContent=i.value?`Hello, ${i.value}! 🎨`:'Please enter your name first. 🎨',10)};
+  </script>
+</body></html>
