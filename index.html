@@ -1,0 +1,27 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TestRepo</title><style>
+:root{font-family:system-ui;line-height:1.5}
+.skip-link{position:fixed;top:-100%;left:0;z-index:100}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+#liveRegion{margin-top:1rem;font-weight:700;color:#155724}
+.counter{font-size:.875rem;color:#767676;margin-bottom:.5rem}
+input{display:block;margin:.5rem 0;padding:.4rem;border:1px solid #767676;border-radius:4px}
+</style></head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+<a href="#main" class="skip-link">Skip to main content</a>
+<header><h1>Welcome to TestRepo</h1></header>
+<main id="main" tabindex="-1">
+<p>Enter your name for a personalized greeting.</p>
+<form id="greetForm">
+<label for="nameInput">Your Name</label>
+<input id="nameInput" type="text" maxlength="20" required aria-describedby="charCount" placeholder="e.g. Palette">
+<div id="charCount" class="counter">0/20 characters</div>
+<button type="submit">Get Greeting</button>
+</form>
+<div id="liveRegion" aria-live="polite"></div>
+</main>
+<script>
+const form=document.getElementById('greetForm'),input=document.getElementById('nameInput'),count=document.getElementById('charCount'),live=document.getElementById('liveRegion');
+input.addEventListener('input',()=>count.textContent=`${input.value.length}/20 characters`);
+form.addEventListener('submit',(e)=>{e.preventDefault();const n=input.value.trim();if(n){live.textContent='';setTimeout(()=>{live.textContent=`Hello, ${n}! 🎨`;input.value='';count.textContent='0/20 characters';input.focus();},10);}});
+</script>
+</body></html>

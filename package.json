@@ -1,0 +1,10 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "grep -q 'aria-live=\"polite\"' index.html && grep -q 'name=\"viewport\"' index.html && echo 'Accessibility and responsiveness checks passed.'",
+    "lint": "grep -q '<main' index.html && echo 'Semantic structure check passed.'"
+  },
+  "author": "Palette",
+  "license": "MIT"
+}
