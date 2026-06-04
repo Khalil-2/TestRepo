@@ -1,0 +1,31 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TestRepo</title><style>
+:root{font-family:system-ui;line-height:1.5}
+.skip-link{position:fixed;top:-100%;left:0;z-index:100}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+#live{margin-top:1rem;font-weight:700;color:#155724}
+button:disabled{opacity:.7;cursor:not-allowed}
+</style></head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+<a href="#main" class="skip-link">Skip to main content</a>
+<header><h1>Welcome to TestRepo</h1></header>
+<main id="main" tabindex="-1">
+<form id="greet-form">
+<label for="name">Your Name (max 20):</label>
+<input id="name" type="text" maxlength="20" aria-describedby="counter">
+<span id="counter" aria-live="polite">20 characters left</span>
+<button id="msg-btn" type="submit" style="display:block;margin-top:1rem">Get Greeting</button>
+</form>
+<div id="live" aria-live="polite"></div>
+</main>
+<script>
+const n=document.getElementById('name'),c=document.getElementById('counter'),b=document.getElementById('msg-btn'),l=document.getElementById('live');
+n.oninput=()=>c.textContent=`${20-n.value.length} characters left`;
+document.getElementById('greet-form').onsubmit=(e)=>{
+e.preventDefault();b.disabled=true;const t=b.textContent;b.textContent='Loading...';l.textContent='';
+setTimeout(()=>{
+l.textContent=n.value?`Hello, ${n.value}! 🎨`:'Hello there! 🎨';
+b.disabled=false;b.textContent=t;b.focus();
+},800);
+};
+</script>
+</body></html>
