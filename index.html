@@ -1,0 +1,30 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TestRepo</title><style>
+:root{font-family:system-ui;line-height:1.5}
+.skip-link{position:fixed;top:-100%;left:0;z-index:100}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+#live{margin-top:1rem;font-weight:700;color:#155724}
+.counter{font-size:.875rem;color:#666;margin-top:.25rem}
+input{padding:.5rem;border:1px solid #767676;border-radius:4px;width:100%;max-width:300px}
+button{padding:.5rem 1rem;background:#0056b3;color:#fff;border:none;border-radius:4px;cursor:pointer}
+button:disabled{opacity:.7;cursor:not-allowed}
+</style></head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+<a href="#main" class="skip-link">Skip to main content</a>
+<header><h1>Welcome to TestRepo</h1></header>
+<main id="main" tabindex="-1">
+<p>Enter your name for a personalized greeting:</p>
+<div style="margin-bottom:1rem">
+<label for="name-input" style="display:block;font-weight:500">Name</label>
+<input id="name-input" type="text" maxlength="20" aria-describedby="char-count" placeholder="Type your name...">
+<div id="char-count" class="counter" aria-live="polite">20 characters remaining</div></div>
+<button id="msg-btn" type="button">Get Greeting</button>
+<div id="live" aria-live="polite"></div></main>
+<script>
+const btn=document.getElementById('msg-btn'),input=document.getElementById('name-input'),count=document.getElementById('char-count'),live=document.getElementById('live');
+input.oninput=()=>{
+const rem=20-input.value.length;count.textContent=`${rem} character${rem===1?'':'s'} remaining`;};
+btn.onclick=()=>{
+if(!input.value.trim()){live.textContent='Please enter your name first! 🎨';input.focus();return;}
+btn.disabled=true;const orig=btn.textContent;btn.textContent='Loading...';live.textContent='';
+setTimeout(()=>{live.textContent=`Hello, ${input.value.trim()}! 🎨`;btn.disabled=false;btn.textContent=orig;btn.focus();},800);};
+</script></body></html>
