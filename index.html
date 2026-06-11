@@ -1,0 +1,13 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TestRepo</title><style>
+:root{font-family:system-ui;line-height:1.5}.skip-link{position:fixed;top:-100%}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+#liveRegion{margin-top:1rem;font-weight:700;color:#155724}button:disabled{opacity:.7;cursor:not-allowed}#char-cnt{font-size:.875rem;color:#666}
+</style></head><body style="max-width:800px;margin:2rem auto;padding:0 1rem"><a href="#main" class="skip-link">Skip to main content</a>
+<header><h1>Welcome to TestRepo</h1></header><main id="main" tabindex="-1"><p>Enter your name for a personalized greeting.</p>
+<form id="greet-form"><div style="margin-bottom:1rem"><label for="name-in" style="display:block">Name</label>
+<input id="name-in" type="text" maxlength="20" aria-describedby="char-cnt" required><div id="char-cnt" aria-live="polite">0 / 20</div></div>
+<button id="msg-btn" type="submit">Get Greeting</button></form><div id="liveRegion" aria-live="polite"></div></main><script>
+const f=document.getElementById('greet-form'),i=document.getElementById('name-in'),c=document.getElementById('char-cnt'),b=document.getElementById('msg-btn'),l=document.getElementById('liveRegion');
+i.addEventListener('input',()=>c.textContent=`${i.value.length} / 20`);
+f.addEventListener('submit',(e)=>{e.preventDefault();b.disabled=true;const t=b.textContent;b.textContent='Loading...';l.textContent='';
+setTimeout(()=>{l.textContent=`Hello, ${i.value}! 🎨`;b.disabled=false;b.textContent=t;b.focus();},800);});
+</script></body></html>
