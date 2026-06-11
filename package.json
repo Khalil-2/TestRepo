@@ -1,0 +1,1 @@
+{"name":"test-repo","scripts":{"test":"grep -q 'aria-live=\"polite\"' index.html && grep -q 'aria-describedby' index.html","lint":"grep -q '<main' index.html"}}
