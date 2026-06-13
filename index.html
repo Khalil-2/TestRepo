@@ -1,0 +1,14 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Palette Greeting</title><style>
+:root{font-family:system-ui;line-height:1.5}.skip-link{position:fixed;top:-100%;left:0;z-index:100}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+#status{margin-top:1rem;font-weight:700;color:#155724}:disabled{opacity:.7;cursor:not-allowed}.counter{font-size:.875rem;color:#666}
+</style></head><body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+<a href="#main" class="skip-link">Skip to main content</a><header><h1>Greeting Generator</h1></header><main id="main" tabindex="-1">
+<form id="greeting-form"><label for="name">Enter your name (max 20 characters):</label><br>
+<input id="name" type="text" maxlength="20" required aria-describedby="char-count" style="margin:.5rem 0"><br>
+<span id="char-count" class="counter" aria-live="polite">0/20</span><br><button id="submit-btn" type="submit" style="margin-top:1rem">Generate Greeting</button></form>
+<div id="status" aria-live="polite"></div></main><script>
+const form=document.getElementById('greeting-form'),input=document.getElementById('name'),btn=document.getElementById('submit-btn'),count=document.getElementById('char-count'),status=document.getElementById('status');
+input.oninput=()=>count.textContent=`${input.value.length}/20`;
+form.onsubmit=(e)=>{e.preventDefault();btn.disabled=input.disabled=true;const orig=btn.textContent;btn.textContent='Processing...';status.textContent='';
+setTimeout(()=>{status.textContent=`Hello, ${input.value}! 🎨`;btn.disabled=input.disabled=false;btn.textContent=orig;form.reset();count.textContent='0/20';btn.focus();},800);};
+</script></body></html>
