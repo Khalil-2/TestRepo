@@ -1,0 +1,23 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TestRepo</title><style>
+:root{font-family:system-ui;line-height:1.5}:focus-visible{outline:3px solid #0056b3;outline-offset:2px}
+.skip-link{position:fixed;top:-100%;left:0;z-index:10}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+#live{margin-top:1rem;font-weight:700;color:#155724}
+button:disabled,input:disabled{opacity:.7;cursor:not-allowed}
+</style></head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+<a href="#main" class="skip-link">Skip to main content</a>
+<header><h1>Welcome to TestRepo</h1></header>
+<main id="main" tabindex="-1">
+<p>Get a personalized greeting with accessible feedback.</p>
+<form id="greet-form"><label for="name">Your Name:</label>
+<input id="name" maxlength="20" aria-describedby="char-count" required>
+<span id="char-count" aria-live="polite">0/20</span><br><br>
+<button type="submit" id="btn">Greet Me</button></form>
+<div id="live" aria-live="polite"></div>
+</main><script>
+const f=document.getElementById('greet-form'),i=document.getElementById('name'),c=document.getElementById('char-count'),b=document.getElementById('btn'),l=document.getElementById('live');
+i.oninput=()=>c.textContent=`${i.value.length}/20`;
+f.onsubmit=(e)=>{e.preventDefault();b.disabled=i.disabled=true;const t=b.textContent;b.textContent='Loading...';l.textContent='';
+setTimeout(()=>{l.textContent=`Hello, ${i.value}! 🎨`;b.disabled=i.disabled=false;b.textContent=t;f.reset();c.textContent='0/20';b.focus();},800);};
+</script></body></html>
