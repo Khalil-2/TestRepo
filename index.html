@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><title>TestRepo</title>
+  <style>
+    :root{font-family:system-ui;line-height:1.5}
+    .skip-link{position:absolute;left:-9999px}.skip-link:focus{position:static;background:#0056b3;color:#fff;padding:.5rem}
+    #live{margin-top:1rem;font-weight:700;color:#155724}
+    .fg{margin-bottom:1rem}#cnt{font-size:.875rem;color:#666}
+  </style>
+</head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <p>Minimal accessible landing page with interactive delight.</p>
+    <form id="f"><div class="fg">
+        <label for="n">Your Name:</label>
+        <input type="text" id="n" maxlength="20" aria-describedby="cnt" required>
+        <div id="cnt">0/20</div>
+      </div><button type="submit" id="s">Get Greeting</button></form>
+    <div id="live" aria-live="polite"></div>
+  </main>
+  <script src="app.js"></script>
+</body></html>
