@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TestRepo - Welcome</title>
+  <style>
+    :root { font-family: system-ui, -apple-system, sans-serif; line-height: 1.5; color-scheme: light dark; }
+    body { max-width: 800px; margin: 2rem auto; padding: 0 1rem; }
+    .skip-link { position: fixed; top: -100%; left: 0; z-index: 100; }
+    .skip-link:focus { top: 0; background: #0056b3; color: #fff; padding: 0.5rem; text-decoration: none; border-radius: 0 0 4px 0; }
+    #liveRegion { margin-top: 1.5rem; font-weight: 700; color: #155724; min-height: 1.5em; }
+    button { padding: 0.5rem 1rem; font-size: 1rem; cursor: pointer; border-radius: 4px; border: 1px solid #ccc; background: #f8f9fa; }
+    button:hover { background: #e2e6ea; }
+    button:focus-visible { outline: 2px solid #0056b3; outline-offset: 2px; }
+    button:disabled { opacity: 0.7; cursor: not-allowed; }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header>
+    <h1>Welcome to TestRepo</h1>
+  </header>
+  <main id="main" tabindex="-1">
+    <p>Experience micro-UX delights designed with accessibility at the core.</p>
+    <button id="msg-btn" type="button">Get a Greeting</button>
+    <div id="liveRegion" aria-live="polite"></div>
+  </main>
+  <script>
+    const btn = document.getElementById('msg-btn');
+    const live = document.getElementById('liveRegion');
+    btn.addEventListener('click', () => {
+      const originalText = btn.textContent;
+      btn.disabled = true;
+      btn.textContent = 'Generating...';
+      live.textContent = ''; // Clear for screen reader re-announcement
+
+      setTimeout(() => {
+        live.textContent = 'Hello! Welcome to TestRepo 🎨';
+        btn.disabled = false;
+        btn.textContent = originalText;
+        btn.focus();
+      }, 800);
+    });
+  </script>
+</body>
+</html>
