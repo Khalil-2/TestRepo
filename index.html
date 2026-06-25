@@ -1,0 +1,17 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>TestRepo | Greeting</title><style>
+:root{font-family:system-ui;line-height:1.5;max-width:600px;margin:2rem auto;padding:0 1rem}
+#status{margin-top:1.5rem;font-weight:700;color:#155724}
+.helper{font-size:.875rem;color:#666;display:flex;justify-content:space-between}
+button:disabled,input:disabled{opacity:.7;cursor:not-allowed}
+</style></head><body><header><h1>TestRepo</h1></header><main id="main"><p>Enter your name for a greeting.</p>
+<form id="greetingForm"><label for="nameInput" style="display:block;font-weight:600">Your Name</label>
+<input id="nameInput" type="text" maxlength="20" placeholder="Jane Doe" required aria-describedby="charCounter" style="width:100%;padding:.5rem;margin:.5rem 0;box-sizing:border-box">
+<div class="helper"><span>Maximum 20 characters</span><span id="charCounter">0/20</span></div>
+<button id="submitBtn" type="submit" style="margin-top:1rem;padding:.6rem 1.2rem;background:#0056b3;color:#fff;border:none;border-radius:4px;font-weight:600;cursor:pointer">Generate Greeting</button></form>
+<div id="status" aria-live="polite"></div></main><script>
+const greetingForm=document.getElementById('greetingForm'),nameInput=document.getElementById('nameInput'),charCounter=document.getElementById('charCounter'),statusDisplay=document.getElementById('status'),submitBtn=document.getElementById('submitBtn');
+nameInput.addEventListener('input',()=>charCounter.textContent=`${nameInput.value.length}/20`);
+greetingForm.addEventListener('submit',(e)=>{e.preventDefault();const name=nameInput.value.trim();if(!name)return;
+submitBtn.disabled=nameInput.disabled=true;const originalText=submitBtn.textContent;submitBtn.textContent='Processing...';statusDisplay.textContent='';
+setTimeout(()=>{statusDisplay.textContent=`Hello, ${name}! Welcome. 🎨`;submitBtn.disabled=nameInput.disabled=false;submitBtn.textContent=originalText;greetingForm.reset();charCounter.textContent='0/20';submitBtn.focus();},800);});
+</script></body></html>
