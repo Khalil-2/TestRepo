@@ -1,0 +1,37 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Palette - Accessible Greeting</title><style>
+  :root{font-family:system-ui;line-height:1.5;color-scheme:light dark}
+  body{max-width:600px;margin:2rem auto;padding:0 1rem}
+  .skip-link{position:fixed;top:-100%;left:0;z-index:100}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+  #status{margin-top:1rem;font-weight:700;color:#155724}
+  .counter{font-size:.875rem;color:#666;margin-left:.5rem}
+  button:disabled{opacity:.7;cursor:not-allowed}
+  button:focus-visible, input:focus-visible{outline:2px solid #0056b3;outline-offset:2px}
+</style></head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <main id="main" tabindex="-1">
+    <h1>Personalized Greeting</h1>
+    <form id="greetingForm">
+      <label for="nameInput">Enter your name:</label>
+      <input id="nameInput" type="text" maxlength="20" aria-describedby="charCounter" required>
+      <span id="charCounter" class="counter">0/20</span>
+      <div style="margin-top:1rem"><button type="submit" id="submitBtn">Generate Greeting</button></div>
+    </form>
+    <div id="status" aria-live="polite"></div>
+  </main>
+  <script>
+    const form = document.getElementById('greetingForm'), input = document.getElementById('nameInput');
+    const counter = document.getElementById('charCounter'), btn = document.getElementById('submitBtn'), status = document.getElementById('status');
+    input.addEventListener('input', () => { counter.textContent = `${input.value.length}/20`; });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); btn.disabled = input.disabled = true;
+      const originalText = btn.textContent; btn.textContent = 'Generating...'; status.textContent = '';
+      setTimeout(() => {
+        status.textContent = `Hello, ${input.value}! 🎨`;
+        btn.disabled = input.disabled = false; btn.textContent = originalText;
+        form.reset(); counter.textContent = '0/20'; btn.focus();
+      }, 800);
+    });
+  </script>
+</body></html>
