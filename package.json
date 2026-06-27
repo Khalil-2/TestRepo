@@ -1,0 +1,10 @@
+{
+  "name": "test-repo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "test": "grep -q 'aria-describedby' index.html && grep -q 'aria-live' index.html"
+  },
+  "author": "Palette",
+  "license": "MIT"
+}
