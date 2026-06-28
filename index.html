@@ -1,0 +1,39 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Greeting</title>
+  <style>
+    :root{font-family:system-ui;line-height:1.5}body{max-width:500px;margin:2rem auto;padding:0 1rem}
+    .skip-link{position:fixed;top:-100%}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+    #status{margin-top:1rem;font-weight:700;color:#155724}.counter{font-size:.875rem;color:#666}
+    button:disabled{opacity:.7;cursor:not-allowed}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <main id="main">
+    <h1>Greeting Generator</h1>
+    <form id="greetingForm">
+      <label for="nameInput">Enter your name:</label>
+      <input id="nameInput" maxlength="20" aria-describedby="charCounter" required>
+      <span id="charCounter" class="counter">0/20</span>
+      <div style="margin-top:1rem"><button type="submit" id="submitBtn">Generate Greeting</button></div>
+    </form>
+    <div id="status" aria-live="polite"></div>
+    <button id="copyBtn" style="display:none;margin-top:1rem">Copy to Clipboard</button>
+  </main>
+  <script>
+    const form=document.getElementById('greetingForm'),input=document.getElementById('nameInput'),counter=document.getElementById('charCounter'),submitBtn=document.getElementById('submitBtn'),status=document.getElementById('status'),copyBtn=document.getElementById('copyBtn');
+    input.addEventListener('input',()=>counter.textContent=`${input.value.length}/20`);
+    form.addEventListener('submit',(e)=>{
+      e.preventDefault();submitBtn.disabled=input.disabled=true;const text=submitBtn.textContent;submitBtn.textContent='Generating...';status.textContent='';copyBtn.style.display='none';
+      setTimeout(()=>{
+        status.textContent=`Hello, ${input.value}! 🎨`;submitBtn.disabled=input.disabled=false;submitBtn.textContent=text;form.reset();counter.textContent='0/20';copyBtn.style.display='inline';submitBtn.focus();
+      },800);
+    });
+    copyBtn.addEventListener('click',()=>{
+      navigator.clipboard.writeText(status.textContent).then(()=>{
+        const text=copyBtn.textContent;copyBtn.textContent='Copied!';setTimeout(()=>copyBtn.textContent=text,2000);
+      });
+    });
+  </script>
+</body></html>
