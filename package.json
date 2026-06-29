@@ -1,0 +1,3 @@
+{
+  "name": "palette-greeting", "private": true, "scripts": { "test": "grep -q 'aria-live' index.html && grep -q 'aria-describedby' index.html" }
+}
