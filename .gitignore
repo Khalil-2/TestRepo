@@ -1,0 +1,5 @@
+*.log
+server.log
+test-results/
+verification/
+node_modules/

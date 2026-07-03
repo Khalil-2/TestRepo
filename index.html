@@ -1,0 +1,32 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Greeting</title>
+  <style>
+    :root{font-family:system-ui;line-height:1.5}body{max-width:500px;margin:2rem auto;padding:0 1rem}
+    .skip-link{position:fixed;top:-100%}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}
+    #status{margin-top:1rem;font-weight:700;color:#155724}
+    button:disabled{opacity:.7;cursor:not-allowed}
+    button:focus-visible{outline:3px solid #0056b3;outline-offset:2px}
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <main id="main">
+    <h1>Greeting Generator</h1>
+    <form id="greetingForm">
+      <label for="nameInput">Enter your name:</label>
+      <input id="nameInput" required>
+      <div style="margin-top:1rem"><button type="submit" id="submitBtn">Generate Greeting</button></div>
+    </form>
+    <div id="status" aria-live="polite"></div>
+  </main>
+  <script>
+    const form=document.getElementById('greetingForm'),input=document.getElementById('nameInput'),submitBtn=document.getElementById('submitBtn'),status=document.getElementById('status');
+    form.addEventListener('submit',(e)=>{
+      e.preventDefault();submitBtn.disabled=input.disabled=true;const text=submitBtn.textContent;submitBtn.textContent='Generating...';status.textContent='';
+      setTimeout(()=>{
+        status.textContent=`Hello, ${input.value}! 🎨`;submitBtn.disabled=input.disabled=false;submitBtn.textContent=text;form.reset();submitBtn.focus();
+      },800);
+    });
+  </script>
+</body></html>
