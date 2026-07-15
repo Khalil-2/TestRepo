@@ -1,0 +1,38 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Greeting</title>
+<style>:root{font-family:system-ui;line-height:1.5}body{max-width:500px;margin:2rem auto;padding:0 1rem}.skip-link{position:fixed;top:-100%}.skip-link:focus{top:0;background:#0056b3;color:#fff;padding:.5rem}#status{margin-top:1.5rem;font-weight:700;color:#155724}button,input{padding:.5rem;border:1px solid #ccc;border-radius:4px;font:inherit}button{background:#007bff;color:#fff;border:none;cursor:pointer;transition:filter .2s}button:hover:not(:disabled){filter:brightness(90%)}button:disabled{opacity:.6}:focus-visible{outline:3px solid #0056b3;outline-offset:2px}#progress-bg{width:100%;background:#eee;height:4px;margin-top:4px;border-radius:2px;overflow:hidden}#progress-bar{width:0;height:100%;background:#007bff;transition:width .2s,background .2s}</style></head>
+<body><a href="#main" class="skip-link">Skip to main content</a><main id="main" tabindex="-1"><h1>Greeting Generator</h1>
+<form id="greetingForm"><label for="nameInput">Your Name</label> <input id="nameInput" maxlength="20" autocomplete="name" aria-describedby="charCounter" required> <span id="charCounter" style="font-size:.875rem;color:#666">0/20</span><div id="progress-bg"><div id="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0"></div></div><div style="margin-top:1rem"><button type="submit" id="submitBtn">Generate Greeting</button></div></form><div id="status" aria-live="polite"></div><button id="copyBtn" style="display:none;margin-top:1rem">Copy Greeting</button></main>
+<script>
+const greetingForm = document.getElementById('greetingForm'), nameInput = document.getElementById('nameInput'), charCounter = document.getElementById('charCounter'), submitBtn = document.getElementById('submitBtn'), statusDisplay = document.getElementById('status'), progressBar = document.getElementById('progress-bar'), copyBtn = document.getElementById('copyBtn'); let copyTimeout;
+nameInput.oninput = () => {
+  const len = nameInput.value.length, atLimit = len >= 20;
+  charCounter.textContent = `${len}/20`;
+  charCounter.style.color = atLimit ? '#dc3545' : '#666';
+  progressBar.style.width = `${(len / 20) * 100}%`;
+  progressBar.style.background = atLimit ? '#dc3545' : '#007bff';
+  progressBar.setAttribute('aria-valuenow', len);
+};
+greetingForm.onsubmit = (e) => {
+  e.preventDefault(); const name = nameInput.value.trim(); if (!name) return;
+  submitBtn.disabled = nameInput.disabled = true; const originalText = submitBtn.textContent;
+  submitBtn.textContent = 'Generating...'; statusDisplay.textContent = ''; copyBtn.style.display = 'none';
+  setTimeout(() => {
+    statusDisplay.textContent = `Hello, ${name}! 🎨`; submitBtn.disabled = nameInput.disabled = false;
+    submitBtn.textContent = originalText; greetingForm.reset(); charCounter.textContent = '0/20';
+    charCounter.style.color = '#666'; progressBar.style.width = '0'; progressBar.style.background = '#007bff';
+    progressBar.setAttribute('aria-valuenow', 0); copyBtn.style.display = 'inline-block'; submitBtn.focus();
+  }, 800);
+};
+copyBtn.onclick = () => {
+  if (copyTimeout) return; const originalText = copyBtn.textContent;
+  navigator.clipboard.writeText(statusDisplay.textContent).then(() => {
+    copyBtn.textContent = 'Copied! ✅';
+    const announcement = document.createElement('div'); announcement.setAttribute('aria-live', 'assertive');
+    announcement.className = 'skip-link'; announcement.textContent = 'Copied to clipboard';
+    document.body.appendChild(announcement);
+    copyTimeout = setTimeout(() => {
+      copyBtn.textContent = originalText; document.body.removeChild(announcement); copyTimeout = 0;
+    }, 2000);
+  });
+};
+</script></body></html>
