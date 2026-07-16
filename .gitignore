@@ -1,0 +1,4 @@
+*.log
+server.log
+verification/
+node_modules/
