@@ -1,0 +1,3 @@
+## 2026-05-30 - Accessible Interactive Buttons and Focus Management
+**Learning:** For interactive buttons that perform asynchronous or simulated actions, disabling the button and providing immediate text feedback prevents redundant triggers. Additionally, explicitly clearing the associated polite `aria-live` region content right before a new update guarantees that screen readers consistently re-announce the message, while resetting focus to the button maintains the user's navigational context.
+**Action:** Always disable buttons during async/timed operations, reset focus properly, and clear polite `aria-live` regions before updating them.
