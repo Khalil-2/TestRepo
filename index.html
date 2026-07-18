@@ -1,0 +1,36 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>TestRepo</title><style>
+  :root{font-family:system-ui;line-height:1.5}
+  .skip-link{position:absolute;left:-9999px}.skip-link:focus{position:static;background:#0056b3;color:#fff;padding:.5rem}
+  #msg-btn{background:#0056b3;color:#fff;border:none;padding:.5rem 1rem;border-radius:4px;cursor:pointer;font-weight:600;transition:filter .2s,opacity .2s}
+  #msg-btn:hover:not(:disabled){filter:brightness(90%)}
+  #msg-btn:focus-visible{outline:3px solid #ffbf47;outline-offset:2px}
+  #msg-btn:disabled{opacity:.6;cursor:not-allowed}
+  #live{margin-top:1rem;font-weight:700}
+</style></head>
+<body style="max-width:800px;margin:2rem auto;padding:0 1rem">
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header><h1>Welcome to TestRepo</h1></header>
+  <main id="main" tabindex="-1">
+    <p>Minimal accessible landing page with interactive delight.</p>
+    <button id="msg-btn">Click for a message</button>
+    <div id="live" aria-live="polite"></div>
+  </main>
+  <script>
+    document.getElementById('msg-btn').addEventListener('click', (event) => {
+      const button = event.currentTarget;
+      const liveRegion = document.getElementById('live');
+
+      button.disabled = true;
+      button.textContent = 'Loading... ⏳';
+      liveRegion.textContent = '';
+
+      setTimeout(() => {
+        liveRegion.textContent = 'Button clicked! 🎨';
+        button.textContent = 'Click for a message';
+        button.disabled = false;
+        button.focus();
+      }, 800);
+    });
+  </script>
+</body></html>
