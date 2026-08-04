@@ -1,0 +1,3 @@
+## 2026-08-03 - [Escape-to-Clear Input Keyboard Shortcut]
+**Learning:** Providing an 'Escape' key shortcut on text inputs with clear buttons offers keyboard power-users a frictionless way to reset content and focus.
+**Action:** Register keydown handlers on text inputs to clear input value and trigger recalculations when the Escape key is pressed.
