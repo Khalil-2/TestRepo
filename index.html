@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><title>Greeting Generator</title>
+<style>
+  body { font-family: system-ui, sans-serif; max-width: 400px; margin: 2rem auto; padding: 1rem; } button, input { padding: 0.5rem; border: 1px solid #ccc; border-radius: 4px; font: inherit; }
+  button { cursor: pointer; transition: filter 0.2s; } button:hover:not(:disabled) { filter: brightness(90%); } button:disabled { opacity: 0.6; cursor: not-allowed; } :focus-visible { outline: 3px solid #0056b3; outline-offset: 2px; } #clearBtn { background: transparent; border: none; padding: 0 0.5rem; margin-left: -2rem; display: none; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } } .fade-in { animation: fadeIn 0.3s ease-out; }
+</style></head>
+<body>
+  <h1>Greeting Generator</h1>
+  <form id="greetingForm">
+    <div style="display: flex; justify-content: space-between; align-items: baseline;"><label for="nameInput">Your Name</label><span id="charCounter" style="font-size: 0.875rem; color: #666; transition: color 0.2s, font-weight 0.2s;">0/20</span></div>
+    <div style="margin: 0.5rem 0; display: flex; align-items: center;"><input id="nameInput" maxlength="20" aria-describedby="charCounter" required style="width: 100%;"><button type="button" id="clearBtn" aria-label="Clear name input">×</button></div>
+    <div id="progressBar" style="height: 4px; width: 0%; background: #007bff; border-radius: 2px; margin-bottom: 1rem; transition: width 0.2s, background-color 0.2s;"></div>
+    <button type="submit" id="submitBtn">Generate Greeting</button>
+  </form>
+  <div style="margin-top: 1.5rem; display: flex; align-items: center; gap: 0.5rem;"><div id="status" aria-live="polite" style="font-weight: bold;"></div><button id="copyBtn" aria-label="Copy greeting" style="display: none;">Copy</button></div>
+  <div id="copyAnnouncer" aria-live="polite" style="position: absolute; overflow: hidden; clip: rect(0 0 0 0); width: 1px; height: 1px; margin: -1px;"></div>
+  <script>
+    const form = document.getElementById('greetingForm'), input = document.getElementById('nameInput'), counter = document.getElementById('charCounter'), progressBar = document.getElementById('progressBar'), submitBtn = document.getElementById('submitBtn'), status = document.getElementById('status'), copyBtn = document.getElementById('copyBtn'), copyAnnouncer = document.getElementById('copyAnnouncer'), clearBtn = document.getElementById('clearBtn');
+    let greetingText = '', copyTimeout; const update = () => {
+      const len = input.value.length; counter.textContent = `${len}/20`;
+      const isRed = len >= 18, isOrange = len >= 15, color = isRed ? '#dc3545' : (isOrange ? '#fd7e14' : '#007bff');
+      counter.style.color = progressBar.style.backgroundColor = color; counter.style.fontWeight = isRed || isOrange ? 'bold' : 'normal';
+      progressBar.style.width = `${(len / 20) * 100}%`; clearBtn.style.display = len > 0 && !input.disabled ? 'inline-block' : 'none';
+    };
+    input.addEventListener('input', update);
+    clearBtn.addEventListener('click', () => { input.value = ''; update(); input.focus(); }); input.addEventListener('keydown', (e) => { if (e.key === 'Escape' && input.value) { e.preventDefault(); input.value = ''; update(); } });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault(); const name = input.value.trim(); if (!name) return;
+      submitBtn.disabled = input.disabled = true; clearBtn.style.display = 'none';
+      const origText = submitBtn.textContent; submitBtn.textContent = 'Generating...';
+      status.textContent = ''; status.classList.remove('fade-in'); copyBtn.style.display = 'none';
+      setTimeout(() => {
+        greetingText = `Hello, ${name}! 🎨`; status.textContent = greetingText; status.classList.add('fade-in');
+        submitBtn.disabled = input.disabled = false; submitBtn.textContent = origText;
+        form.reset(); update(); copyBtn.style.display = 'inline-block'; submitBtn.focus();
+      }, 800);
+    });
+    copyBtn.addEventListener('click', () => {
+      if (copyTimeout) return;
+      navigator.clipboard.writeText(greetingText).then(() => {
+        copyBtn.textContent = 'Copied! ✅'; copyBtn.setAttribute('aria-label', 'Greeting copied'); copyAnnouncer.textContent = '';
+        setTimeout(() => copyAnnouncer.textContent = 'Greeting copied to clipboard', 50);
+        copyTimeout = setTimeout(() => { copyBtn.textContent = 'Copy'; copyBtn.setAttribute('aria-label', 'Copy greeting'); copyTimeout = null; }, 2000);
+      });
+    });
+  </script>
+</body></html>
