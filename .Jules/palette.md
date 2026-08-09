@@ -1,0 +1,1 @@
+## 2026-08-04 - [Escape-to-Clear] **Learning:** Escape keyboard shortcut clears inputs. **Action:** Keydown Escape resets input.
