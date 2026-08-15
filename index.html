@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Greeting Generator</title>
+  <style>
+    :focus-visible { outline: 3px solid #0056b3; outline-offset: 2px; }
+  </style>
+</head>
+<body style="font-family: system-ui; max-width: 400px; margin: 2rem auto; padding: 0 1rem;">
+  <h1>Greeting Generator</h1>
+  <form id="greetingForm">
+    <label for="nameInput">Your Name</label>
+    <input id="nameInput" aria-keyshortcuts="Escape" required>
+    <button type="submit">Generate</button>
+  </form>
+  <div id="status" aria-live="polite" style="margin-top: 1rem; font-weight: bold;"></div>
+  <script>
+    const form = document.getElementById('greetingForm');
+    const input = document.getElementById('nameInput');
+    const status = document.getElementById('status');
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') input.value = '';
+    });
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      status.textContent = `Hello, ${input.value.trim()}! 🎨`;
+    });
+  </script>
+</body>
+</html>
