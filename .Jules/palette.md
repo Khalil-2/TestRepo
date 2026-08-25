@@ -1,0 +1,2 @@
+## 2026-08-06 - [Progress Bar Accessibility]
+**Learning:** Adding ARIA progressbar attributes (`role="progressbar"`) and hiding empty states (`opacity: 0`) enhances accessibility while preventing visual subpixel artifacts.
