@@ -1,0 +1,3 @@
+## 2026-08-07 - [Progress Bar Spacing & ARIA Accessibility]
+**Learning:** Progress indicators placed below inputs with focus rings (`outline-offset: 2px`) require top margin (`margin: .6rem 0`) to prevent visual outline overlap while ARIA attributes (`role="progressbar"`, `aria-valuenow`) ensure accessibility.
+**Action:** Provide adequate vertical spacing for progress bars adjacent to focused inputs and include ARIA progressbar semantics.
