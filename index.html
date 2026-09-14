@@ -1,0 +1,58 @@
+<!DOCTYPE html><html lang="en">
+<head><meta charset="UTF-8"><title>Greeting Generator</title><style>
+button,input{transition:all .2s}button:hover:not(:disabled){filter:brightness(90%);cursor:pointer}
+button:disabled{background:#ccc;color:#666;cursor:not-allowed}:focus-visible{outline:3px solid #0056b3;outline-offset:2px}
+#clearBtn{background:transparent;color:#666;border:none;padding:0;width:32px;height:32px;border-radius:50%;display:none;position:absolute;right:4px;top:50%;transform:translateY(-50%);align-items:center;justify-content:center;cursor:pointer}#clearBtn:hover{background:#eee;color:#333}
+</style></head>
+<body style="font-family:system-ui;max-width:400px;margin:2rem auto;padding:0 1rem">
+<h1>Greeting Generator</h1>
+<form id="greetingForm">
+  <div style="display:flex;justify-content:space-between"><label for="nameInput">Your Name</label><span id="charCounter" style="font-size:.875rem;color:#666">0/20</span></div>
+  <div style="margin:.5rem 0;position:relative">
+    <input id="nameInput" maxlength="20" aria-describedby="charCounter" aria-keyshortcuts="Escape" required style="width:100%;box-sizing:border-box;padding-right:2.5rem">
+    <button type="button" id="clearBtn" aria-label="Clear name input" title="Clear name input (Esc)">×</button>
+  </div>
+  <div id="progressBar" role="progressbar" aria-valuemin="0" aria-valuemax="20" aria-valuenow="0" style="height:4px;width:0%;opacity:0;background:#0056b3;border-radius:2px;margin-bottom:.5rem;transition:all .1s"></div>
+  <button type="submit" id="submitBtn">Generate Greeting</button>
+</form>
+<div style="margin-top:1.5rem;display:flex;align-items:center;gap:.5rem">
+  <div id="status" aria-live="polite" style="font-weight:bold"></div>
+  <button id="copyBtn" aria-label="Copy greeting" style="display:none">Copy</button>
+</div>
+<div id="copyAnnouncer" aria-live="polite" style="position:fixed;top:-100%"></div>
+<script>
+  const form = document.getElementById('greetingForm'), input = document.getElementById('nameInput');
+  const counter = document.getElementById('charCounter'), clearBtn = document.getElementById('clearBtn');
+  const bar = document.getElementById('progressBar'), copyBtn = document.getElementById('copyBtn');
+  const announcer = document.getElementById('copyAnnouncer');
+
+  const updateUI = () => {
+    const len = input.value.length;
+    counter.textContent = `${len}/20`;
+    clearBtn.style.display = len > 0 ? 'flex' : 'none';
+    bar.style.width = `${(len / 20) * 100}%`;
+    bar.style.opacity = len > 0 ? '1' : '0';
+    bar.setAttribute('aria-valuenow', len);
+  };
+
+  input.addEventListener('input', updateUI);
+  clearBtn.addEventListener('click', () => { input.value = ''; updateUI(); input.focus(); });
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && input.value) { e.preventDefault(); input.value = ''; updateUI(); }
+  });
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    document.getElementById('status').textContent = `Hello, ${input.value.trim()}! 🎨`;
+    copyBtn.style.display = 'inline-block';
+    form.reset(); updateUI();
+  });
+
+  copyBtn.addEventListener('click', () => {
+    navigator.clipboard.writeText(document.getElementById('status').textContent);
+    copyBtn.textContent = 'Copied! ✅';
+    announcer.textContent = 'Greeting copied to clipboard';
+    setTimeout(() => { copyBtn.textContent = 'Copy'; }, 2000);
+  });
+</script>
+</body></html>
