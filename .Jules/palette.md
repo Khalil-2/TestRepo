@@ -1,0 +1,1 @@
+## 2026-08-10 - [ARIA Shortcuts] `aria-keyshortcuts="Escape"` and tooltip hints improve keyboard discoverability.
