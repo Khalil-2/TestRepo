@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Greeting Generator</title><style>
+:root{font-family:system-ui,sans-serif;line-height:1.5}body{max-width:600px;margin:2rem auto;padding:0 1rem}
+.skip-link{position:absolute;left:-9999px;top:0;z-index:100}.skip-link:focus{left:0;position:fixed;background:#0056b3;color:#fff;padding:.5rem;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);border:0}
+form{display:grid;gap:.5rem;margin-top:1.5rem}input{padding:.5rem;font-size:1rem;border:1px solid #ccc;border-radius:4px;outline-offset:2px}
+input:focus-visible,button:focus-visible{outline:2px solid #0056b3}.progress-container{height:6px;background:#e0e0e0;border-radius:3px;overflow:hidden;margin-top:.6rem}
+.progress-bar{height:100%;width:0%;background:#28a745;transition:width .2s,background-color .2s;opacity:0}
+.counter-wrapper{display:flex;justify-content:space-between;align-items:center;font-size:.875rem;color:#555}
+.counter-text{font-weight:bold;transition:color .2s}.counter-text.warning{color:#d97706}.counter-text.danger{color:#dc3545}
+button{padding:.5rem 1rem;cursor:pointer;background:#0056b3;color:#fff;border:none;border-radius:4px;font-weight:bold}button:hover:not(:disabled){filter:brightness(90%)}
+#greetingOutput{margin-top:1.5rem;font-weight:bold;min-height:1.5em;color:#155724;display:flex;align-items:center;justify-content:space-between;animation:fadeIn .3s ease-in}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}.copy-btn{background:#6c757d;font-size:.75rem;padding:.25rem .5rem;margin-left:1rem}</style></head>
+<body><a href="#main" class="skip-link">Skip to main content</a><header><h1>Greeting Generator</h1></header>
+<main id="main" tabindex="-1"><p>Enter your name to receive a personalized greeting. Press <kbd>Escape</kbd> to clear.</p>
+<form id="greetingForm"><label for="nameInput">Your Name</label><input id="nameInput" type="text" maxlength="20" required aria-describedby="charCounter" aria-keyshortcuts="Escape" placeholder="e.g. Palette" autocomplete="off"><div class="progress-container" role="progressbar" id="progressBar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="20" aria-label="Character limit progress"><div class="progress-bar" id="barFill"></div></div><div class="counter-wrapper"><span id="shortcutHint" style="font-size:0.75rem;color:#666">Press Escape to clear</span><div id="charCounter" class="counter-text">0 / 20</div></div><button type="submit">Get Greeting</button></form>
+<div id="srAnnouncer" class="sr-only" aria-live="polite" aria-atomic="true"></div><div id="greetingOutput" aria-live="polite"></div></main>
+<script>
+const greetingForm=document.getElementById('greetingForm'), nameInput=document.getElementById('nameInput'), charCounter=document.getElementById('charCounter'), progressBar=document.getElementById('progressBar'), barFill=document.getElementById('barFill'), greetingOutput=document.getElementById('greetingOutput'), srAnnouncer=document.getElementById('srAnnouncer');
+let copyTimeout=null, lastAnnouncedThreshold=0;
+function updateCounter(){
+  const len=nameInput.value.length, pct=(len/20)*100;
+  charCounter.textContent=`${len} / 20`; progressBar.setAttribute('aria-valuenow', len); barFill.style.width=`${pct}%`; barFill.style.opacity=len>0?'1':'0';
+  if(len>=18){barFill.style.backgroundColor='#dc3545';charCounter.className='counter-text danger';if(lastAnnouncedThreshold!==18){srAnnouncer.textContent='Warning: 18 of 20 characters used.';lastAnnouncedThreshold=18;}}
+  else if(len>=15){barFill.style.backgroundColor='#d97706';charCounter.className='counter-text warning';if(lastAnnouncedThreshold!==15){srAnnouncer.textContent='15 of 20 characters used.';lastAnnouncedThreshold=15;}}
+  else{barFill.style.backgroundColor='#28a745';charCounter.className='counter-text';lastAnnouncedThreshold=0;}
+}
+nameInput.addEventListener('input', updateCounter);
+nameInput.addEventListener('keydown', (e)=>{if(e.key==='Escape'&&nameInput.value){nameInput.value='';updateCounter();srAnnouncer.textContent='Input cleared.';}});
+greetingForm.addEventListener('submit', (e)=>{
+  e.preventDefault(); const name=nameInput.value.trim(); if(!name) return;
+  const msg=`Hello, ${name}! Have a wonderful day! 🎨`; greetingOutput.textContent='';
+  const textSpan=document.createElement('span'); textSpan.textContent=msg;
+  const copyBtn=document.createElement('button'); copyBtn.type='button'; copyBtn.className='copy-btn'; copyBtn.id='copyBtn'; copyBtn.textContent='Copy'; copyBtn.setAttribute('aria-label', 'Copy greeting to clipboard');
+  copyBtn.addEventListener('click', ()=>{
+    if(!navigator.clipboard) return;
+    navigator.clipboard.writeText(msg).then(()=>{
+      copyBtn.textContent='Copied! ✅'; copyBtn.setAttribute('aria-label', 'Greeting copied to clipboard');
+      srAnnouncer.textContent=''; setTimeout(()=>{srAnnouncer.textContent='Greeting copied to clipboard.';}, 50);
+      if(copyTimeout) clearTimeout(copyTimeout);
+      copyTimeout=setTimeout(()=>{copyBtn.textContent='Copy'; copyBtn.setAttribute('aria-label', 'Copy greeting to clipboard'); copyTimeout=null;}, 2000);
+    });
+  });
+  greetingOutput.append(textSpan, copyBtn); nameInput.value=''; updateCounter(); nameInput.focus();
+});
+</script></body></html>
