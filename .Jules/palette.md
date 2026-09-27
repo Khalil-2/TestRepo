@@ -1,0 +1,1 @@
+## 2026-05-30 - Dynamic Character Limit Guidance: **Learning:** Pair aria-valuenow on progressbars with discrete aria-live threshold updates. **Action:** Toggle zero-width progress bar opacity.
