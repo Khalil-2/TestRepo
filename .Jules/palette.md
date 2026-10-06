@@ -1,0 +1,1 @@
+## 2026-08-06 - [Escape-to-Clear Shortcut] Learning: Escape key shortcut on text inputs offers keyboard users a frictionless way to reset content and focus.
