@@ -1,0 +1,3 @@
+## 2026-08-06 - [Shortcut Discoverability via Tooltips and ARIA Attributes]
+**Learning:** Pairing `aria-keyshortcuts` with explicit visual tooltips (e.g. `title="Clear name (Esc)"`) on clear buttons informs both screen reader users and sighted hover users of keyboard efficiency shortcuts without cluttering UI.
+**Action:** Always provide visual tooltip hints alongside ARIA keyboard shortcut annotations on clear buttons.
