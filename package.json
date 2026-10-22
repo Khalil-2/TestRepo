@@ -1,0 +1,1 @@
+{"name":"palette-greeting","private":true,"scripts":{"test":"pnpm test:a11y","test:a11y":"grep -q 'aria-describedby=\"charCounter\"' index.html"}}
