@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Greeting Generator</title>
+</head>
+<body>
+  <h1>Greeting Generator</h1>
+  <div id="greeting">Hello, World! 🎨</div>
+  <button id="copyBtn" aria-label="Copy greeting to clipboard">Copy</button>
+  <div id="announcer" aria-live="polite" style="position:absolute;left:-9999px"></div>
+
+  <script>
+    const copyBtn = document.getElementById('copyBtn');
+    const announcer = document.getElementById('announcer');
+    const greetingText = document.getElementById('greeting').textContent;
+    let timer;
+
+    copyBtn.addEventListener('click', () => {
+      if (timer) return;
+      navigator.clipboard.writeText(greetingText).then(() => {
+        copyBtn.textContent = 'Copied! ✅';
+        copyBtn.setAttribute('aria-label', 'Greeting copied to clipboard');
+        announcer.textContent = 'Greeting copied to clipboard';
+        timer = setTimeout(() => {
+          copyBtn.textContent = 'Copy';
+          copyBtn.setAttribute('aria-label', 'Copy greeting to clipboard');
+          announcer.textContent = '';
+          timer = null;
+        }, 2000);
+      });
+    });
+  </script>
+</body>
+</html>
