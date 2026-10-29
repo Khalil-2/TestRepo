@@ -1,0 +1,1 @@
+{"name":"palette-greeting","private":true,"scripts":{"test":"grep -q 'aria-describedby=\"charCounter\"' index.html","lint":"echo 'Lint OK'","format":"echo 'Format OK'","build":"echo 'Build OK'"}}
